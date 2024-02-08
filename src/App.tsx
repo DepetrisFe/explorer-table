@@ -1,15 +1,12 @@
-import { useState } from "react";
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TablePagination,
-  TableRow,
-} from "@mui/material";
-import "./App.css";
+import ExplorerTable from "./components/explorerTable";
+
+const columns = [
+  { key: "brand", label: "Brand", size: 100, alignment: "center" },
+  { key: "model", label: "Model", size: 100, alignment: "center" },
+  { key: "year", label: "Year", size: 100, alignment: "center" },
+  { key: "fuelType", label: "Fuel type", size: 100, alignment: "center" },
+  { key: "kilometers", label: "Kilometers", size: 100, alignment: "center" },
+];
 
 const rows = [
   {
@@ -63,60 +60,7 @@ const rows = [
 ];
 
 function App() {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  return (
-    <Paper>
-      <TableContainer>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">Brand</TableCell>
-              <TableCell align="center">Model</TableCell>
-              <TableCell align="center">Year</TableCell>
-              <TableCell align="center">Fuel type</TableCell>
-              <TableCell align="center">Kilometers</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell align="center">{row.brand}</TableCell>
-                <TableCell align="center">{row.model}</TableCell>
-                <TableCell align="center">{row.year}</TableCell>
-                <TableCell align="center">{row.fuelType}</TableCell>
-                <TableCell align="center">{row.kilometers}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
-  );
+  return <ExplorerTable columns={columns} rows={rows} />;
 }
 
 export default App;
