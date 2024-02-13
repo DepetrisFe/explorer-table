@@ -17,6 +17,7 @@ import {
 interface ExplorerTableProps {
   columns: any[];
   rows: any[];
+  renderItem: (row: any, index: number) => JSX.Element;
 }
 
 type Order = "asc" | "desc";

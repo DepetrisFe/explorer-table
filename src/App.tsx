@@ -1,4 +1,6 @@
 import ExplorerTable from "./components/explorerTable";
+import VehicleRow from "./components/explorerTable/rows/vehicle";
+import { Vehicle } from "./shared/interfaces/vehicles";
 
 const columns = [
   { key: "brand", label: "Brand", size: 100, alignment: "center" },
@@ -8,7 +10,7 @@ const columns = [
   { key: "kilometers", label: "Kilometers", size: 100, alignment: "center" },
 ];
 
-const rows = [
+const rows: Vehicle[] = [
   {
     id: 1,
     brand: "Nissan",
@@ -60,7 +62,15 @@ const rows = [
 ];
 
 function App() {
-  return <ExplorerTable columns={columns} rows={rows} />;
+  return (
+    <ExplorerTable
+      columns={columns}
+      rows={rows}
+      renderItem={(row: Vehicle, index: number) => {
+        return <VehicleRow row={row} key={index}/>;
+      }}
+    />
+  );
 }
 
 export default App;
