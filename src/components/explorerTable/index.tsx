@@ -13,6 +13,7 @@ import {
   TableRow,
   TableSortLabel,
 } from "@mui/material";
+import styles from "./explorer-table.module.css";
 
 interface ExplorerTableProps {
   columns: any[];
@@ -25,7 +26,7 @@ type Order = "asc" | "desc";
 const ExplorerTable = (props: ExplorerTableProps) => {
   const { columns, rows } = props;
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [order, setOrder] = useState<Order>("asc");
   const [orderBy, setOrderBy] = useState<string>(columns[0].key);
 
@@ -97,9 +98,13 @@ const ExplorerTable = (props: ExplorerTableProps) => {
   };
 
   return (
-    <Paper>
-      <TableContainer>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <Paper elevation={3}>
+      <TableContainer className={styles.tableContainer}>
+        <Table
+          stickyHeader={true}
+          sx={{ minWidth: 650 }}
+          aria-label="simple table"
+        >
           <TableHead>
             <TableRow>
               {columns.map((column) => (
@@ -126,7 +131,7 @@ const ExplorerTable = (props: ExplorerTableProps) => {
             {visibleRows.map((row) => (
               <TableRow
                 key={row.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                // sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell align="center">{row.brand}</TableCell>
                 <TableCell align="center">{row.model}</TableCell>
@@ -139,7 +144,8 @@ const ExplorerTable = (props: ExplorerTableProps) => {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
+        className={styles.tablePagination}
+        rowsPerPageOptions={[10, 25, 30]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}
