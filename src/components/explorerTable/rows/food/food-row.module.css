@@ -1,0 +1,7 @@
+.foodRow {
+  cursor: pointer;
+}
+
+.foodRow:hover {
+  background-color: #ebfec1;
+}

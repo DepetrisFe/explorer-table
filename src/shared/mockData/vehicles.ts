@@ -1,6 +1,7 @@
+import { Column } from "../interfaces/table";
 import { Vehicle } from "../interfaces/vehicles";
 
-export const columns = [
+export const vehicleColumns: Column[] = [
   { key: "brand", label: "Brand", size: 100, alignment: "center" },
   { key: "model", label: "Model", size: 100, alignment: "center" },
   { key: "year", label: "Year", size: 100, alignment: "center" },
@@ -8,7 +9,7 @@ export const columns = [
   { key: "kilometers", label: "Kilometers", size: 100, alignment: "center" },
 ];
 
-export const rows: Vehicle[] = [
+export const vehicleRows: Vehicle[] = [
   {
     id: 1,
     brand: "Nissan",

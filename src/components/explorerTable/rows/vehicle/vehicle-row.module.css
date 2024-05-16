@@ -1,0 +1,12 @@
+.vehicleRow {
+  cursor: pointer;
+}
+
+/* .vehicleRow:last-child td,
+.vehicleRow:last-child th {
+  border: 0;
+} */
+
+.vehicleRow:hover {
+  background-color: #c7d6ff;
+}

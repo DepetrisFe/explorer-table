@@ -3,6 +3,22 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  justify-content: center;
   padding: 2rem;
+}
+
+.buttonsContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.button {
+  width: 120px;
+}
+
+.iconButton {
+  position: absolute;
+  right: 0;
 }

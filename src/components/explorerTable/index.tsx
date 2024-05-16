@@ -24,7 +24,7 @@ interface ExplorerTableProps {
 type Order = "asc" | "desc";
 
 const ExplorerTable = (props: ExplorerTableProps) => {
-  const { columns, rows } = props;
+  const { columns, renderItem, rows } = props;
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [order, setOrder] = useState<Order>("asc");
@@ -44,10 +44,7 @@ const ExplorerTable = (props: ExplorerTableProps) => {
     setOrderBy(property);
   };
 
-  const visibleRows = stableSort(rows, getComparator(order, orderBy)).slice(
-    page * rowsPerPage,
-    page * rowsPerPage + rowsPerPage
-  );
+  const visibleRows = stableSort(rows, getComparator(order, orderBy));
 
   function getComparator<Key extends keyof any>(
     order: Order,
@@ -128,18 +125,9 @@ const ExplorerTable = (props: ExplorerTableProps) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {visibleRows.map((row) => (
-              <TableRow
-                key={row.id}
-                // sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell align="center">{row.brand}</TableCell>
-                <TableCell align="center">{row.model}</TableCell>
-                <TableCell align="center">{row.year}</TableCell>
-                <TableCell align="center">{row.fuelType}</TableCell>
-                <TableCell align="center">{row.kilometers}</TableCell>
-              </TableRow>
-            ))}
+            {visibleRows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row, index) => renderItem(row, index))}
           </TableBody>
         </Table>
       </TableContainer>
